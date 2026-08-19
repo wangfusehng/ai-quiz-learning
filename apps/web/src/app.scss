@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap");
-
+page,
 :root {
   --bg: #fff6ef;
   --bg-deep: #f7ebe3;
@@ -18,7 +17,7 @@
   --shadow-sm: 0 6px 16px rgba(62, 36, 18, 0.06);
   --r-card: 24px;
   --r-pill: 999px;
-  --font: "Noto Sans SC", "PingFang SC", "HarmonyOS Sans", sans-serif;
+  --font: "PingFang SC", "HarmonyOS Sans", "Noto Sans SC", sans-serif;
 }
 
 page,
@@ -34,14 +33,10 @@ body,
   min-height: 100vh;
   max-width: 375px;
   margin: 0 auto;
-  background:
-    radial-gradient(900px 420px at 8% -8%, #ffe8d4 0%, transparent 55%),
-    radial-gradient(700px 380px at 100% 0%, #ffd9c4 0%, transparent 50%),
-    var(--bg);
+  background-color: #fff6ef;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  box-shadow: var(--shadow);
 }
 
 .nav {
@@ -61,13 +56,16 @@ body,
 }
 
 .hello-small {
-  color: var(--ink-soft);
+  display: block;
+  color: #8a7f76;
   font-size: 12px;
 }
 
 .hello-strong {
+  display: block;
   font-size: 22px;
   font-weight: 700;
+  color: #2b2420;
 }
 
 .coin {
@@ -110,8 +108,10 @@ body,
 }
 
 .nav-title {
+  display: block;
   font-size: 16px;
   font-weight: 700;
+  color: #2b2420;
 }
 
 .stage {
@@ -132,10 +132,12 @@ body,
 }
 
 .hero-title {
+  display: block;
   margin: 0 0 12px;
   font-size: 22px;
   line-height: 1.35;
   font-weight: 700;
+  color: #2b2420;
 }
 
 .field {
@@ -164,8 +166,9 @@ body,
 }
 
 .hint {
+  display: block;
   margin: 8px 0 0;
-  color: var(--ink-soft);
+  color: #8a7f76;
   font-size: 12px;
   line-height: 1.5;
 }
@@ -192,8 +195,9 @@ body,
   gap: 8px;
   width: 100%;
   min-height: 52px;
-  border-radius: var(--r-pill);
-  background: linear-gradient(180deg, #ff8a4a, var(--orange-deep));
+  border-radius: 999px;
+  background-color: #ff7a33;
+  background-image: linear-gradient(180deg, #ff8a4a, #f56a22);
   color: #fff;
   font-size: 16px;
   font-weight: 600;
@@ -201,16 +205,30 @@ body,
   box-sizing: border-box;
 }
 
+.btn-label,
+.btn text {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
 .btn.is-disabled {
-  background: #e8ddd4;
+  background-color: #e8ddd4;
+  background-image: none;
   color: #fff;
   box-shadow: none;
 }
 
 .btn-ghost {
-  background: #fff;
-  color: var(--ink);
-  box-shadow: var(--shadow-sm);
+  background-color: #fff;
+  background-image: none;
+  color: #2b2420;
+  box-shadow: 0 6px 16px rgba(62, 36, 18, 0.06);
+}
+
+.btn-ghost .btn-label,
+.btn-ghost text {
+  color: #2b2420;
 }
 
 .btn-row {
@@ -225,9 +243,11 @@ body,
 }
 
 .section-title {
+  display: block;
   margin: 18px 2px 10px;
   font-size: 14px;
   font-weight: 700;
+  color: #2b2420;
 }
 
 .topic-grid {
@@ -567,6 +587,117 @@ body,
 .card-b {
   font-weight: 700;
   font-size: 14px;
+}
+
+.list-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.list-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.list-meta {
+  display: block;
+  margin-top: 4px;
+  color: var(--ink-soft);
+  font-size: 12px;
+}
+
+.list-replay {
+  width: auto;
+  min-height: 40px;
+  padding: 0 14px;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.list-replay .btn-label,
+.list-replay text {
+  font-size: 13px;
+}
+
+.profile-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+button.avatar-btn,
+.avatar-btn {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 56px !important;
+  min-width: 56px !important;
+  max-width: 56px !important;
+  height: 56px !important;
+  min-height: 56px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  border: none !important;
+  border-radius: 50% !important;
+  background-color: #ffe7d6 !important;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  font-size: 12px;
+  color: #f56a22;
+}
+
+.avatar-btn::after {
+  display: none;
+  border: none;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: block;
+  background: #ffe7d6;
+}
+
+.avatar-ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f56a22;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.avatar-ph-text {
+  color: #f56a22;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.nickname-input {
+  flex: 1;
+  height: 40px;
+  min-width: 0;
+  border-radius: 18px;
+  background: #f7f1ec;
+  padding: 0 14px;
+  font-size: 15px;
+  color: #2b2420;
 }
 
 .center-hint {

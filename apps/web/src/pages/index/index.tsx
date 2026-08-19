@@ -61,10 +61,10 @@ export default function Index() {
           </View>
           <Text className='hint'>例如：RAG 的基本概念、工作流程、常见问题、Prompt 工程……</Text>
           <View className={alertOn ? 'alert is-on' : 'alert'}>
-            材料太短，出题会空洞。再贴一段正文。
+            <Text>材料太短，出题会空洞。再贴一段正文。</Text>
           </View>
           <View className='btn' onClick={submit}>
-            <Text>开始生成题目 →</Text>
+            <Text className='btn-label'>开始生成题目 →</Text>
           </View>
         </View>
         <Text className='section-title'>快速主题</Text>

@@ -7,6 +7,7 @@ export default defineAppConfig({
     'pages/report/index',
     'pages/records/index',
     'pages/me/index',
+    'pages/about/index',
   ],
   window: {
     navigationStyle: 'custom',

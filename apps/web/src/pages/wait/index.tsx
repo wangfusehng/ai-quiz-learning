@@ -67,7 +67,7 @@ export default function WaitPage() {
         <Text className='stem'>{waitCopy(seconds)}</Text>
         <Text className='hint center-hint'>请留在这一页。切走可能中断。没有假进度条。</Text>
         <View className='btn btn-ghost' style={{ marginTop: 20 }} onClick={onCancel}>
-          取消本次
+          <Text className='btn-label'>取消本次</Text>
         </View>
       </View>
     </View>

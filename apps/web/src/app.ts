@@ -1,17 +1,15 @@
 import { PropsWithChildren } from 'react'
 import { useLaunch } from '@tarojs/taro'
 
+import { silentLogin } from './api/client'
 import './app.scss'
 
 function App({ children }: PropsWithChildren<any>) {
   useLaunch(() => {
-    console.log('关卡学 launched.')
+    silentLogin()
   })
 
-  // children 是将要会渲染的页面
   return children
 }
-  
-
 
 export default App

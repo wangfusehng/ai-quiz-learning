@@ -19,13 +19,13 @@ export default function FailPage() {
               className='btn'
               onClick={() => Taro.redirectTo({ url: '/pages/wait/index' })}
             >
-              重试
+              <Text className='btn-label'>重试</Text>
             </View>
             <View
               className='btn btn-ghost'
               onClick={() => Taro.redirectTo({ url: '/pages/index/index' })}
             >
-              回首页
+              <Text className='btn-label'>回首页</Text>
             </View>
           </View>
         </View>

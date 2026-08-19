@@ -1,8 +1,47 @@
+import Taro from '@tarojs/taro'
 import { create } from 'zustand'
 import type { AnswerItem, QuizDocument, ReportDocument } from '../types/quiz'
 
 export const SAMPLE_MATERIAL =
   '卡尼曼讲过，人对确定损失的厌恶，常常大过对同等收益的喜欢。看完视频觉得懂了，转头却说不清损失厌恶到底在怕什么。真正的难点不是记术语，而是把确定亏掉和确定赚到放在同一笔钱上对比。看懂是熟悉感，能讲出来才是提取练习。测验效应说明，主动回忆比再看一遍更有助于记住关键概念。材料强调这不是鼓励冒险亏损，也不是通货膨胀的另一种说法。同样一笔钱，确定亏掉往往比确定赚到更扎心。熟悉感会让人误以为已经掌握，直到被提问才发现讲不完整。'
+
+const REPLAY_QUIZ_KEY = 'guan_ka_xue_replay_quiz'
+const REPLAY_FROM_KEY = 'guan_ka_xue_replay_from'
+
+export function stashReplayQuiz(quiz: QuizDocument, from = 'me') {
+  Taro.setStorageSync(REPLAY_QUIZ_KEY, quiz)
+  Taro.setStorageSync(REPLAY_FROM_KEY, from)
+}
+
+export function peekReplayQuiz(): QuizDocument | null {
+  try {
+    const quiz = Taro.getStorageSync(REPLAY_QUIZ_KEY) as QuizDocument
+    if (quiz && quiz.quizId && Array.isArray(quiz.questions) && quiz.questions.length) {
+      return quiz
+    }
+  } catch {
+    return null
+  }
+  return null
+}
+
+export function clearReplayQuiz() {
+  try {
+    Taro.removeStorageSync(REPLAY_QUIZ_KEY)
+  } catch {
+    return
+  }
+}
+
+export function consumeReplayFrom(): string {
+  try {
+    const from = Taro.getStorageSync(REPLAY_FROM_KEY)
+    Taro.removeStorageSync(REPLAY_FROM_KEY)
+    return typeof from === 'string' ? from : ''
+  } catch {
+    return ''
+  }
+}
 
 interface SessionState {
   material: string
@@ -31,6 +70,7 @@ interface SessionState {
   saveShortAnswer: () => void
   cancelGenerate: () => void
   resetAll: () => void
+  replayQuiz: (quiz: QuizDocument) => void
 }
 
 export const useSession = create<SessionState>((set, get) => ({
@@ -126,6 +166,19 @@ export const useSession = create<SessionState>((set, get) => ({
     })
   },
   cancelGenerate: () => set({ cancelled: true }),
+  replayQuiz: (quiz) =>
+    set({
+      quiz,
+      answers: {},
+      currentIndex: 0,
+      selectedOptionId: null,
+      revealed: false,
+      shortText: '',
+      report: null,
+      startedAt: new Date().toISOString(),
+      cancelled: false,
+      inaccurate: [],
+    }),
   resetAll: () =>
     set({
       quiz: null,

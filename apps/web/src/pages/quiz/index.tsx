@@ -3,11 +3,12 @@ import Taro from '@tarojs/taro'
 import { useEffect } from 'react'
 import { createReport } from '../../api/client'
 import { BackButton, Coin } from '../../components/Chrome'
-import { useSession } from '../../store/session'
+import { consumeReplayFrom, clearReplayQuiz, peekReplayQuiz, useSession } from '../../store/session'
 import type { SingleChoiceQuestion } from '../../types/quiz'
 
 export default function QuizPage() {
   const quiz = useSession((s) => s.quiz)
+  const replayQuiz = useSession((s) => s.replayQuiz)
   const currentIndex = useSession((s) => s.currentIndex)
   const selectedOptionId = useSession((s) => s.selectedOptionId)
   const revealed = useSession((s) => s.revealed)
@@ -23,10 +24,17 @@ export default function QuizPage() {
   const markInaccurate = useSession((s) => s.markInaccurate)
 
   useEffect(() => {
-    if (!quiz) {
-      Taro.redirectTo({ url: '/pages/index/index' })
+    if (quiz) {
+      clearReplayQuiz()
+      return
     }
-  }, [quiz])
+    const stored = peekReplayQuiz()
+    if (stored) {
+      replayQuiz(stored)
+      return
+    }
+    Taro.redirectTo({ url: '/pages/index/index' })
+  }, [quiz, replayQuiz])
 
   if (!quiz) {
     return null
@@ -96,7 +104,16 @@ export default function QuizPage() {
   return (
     <View className='page'>
       <View className='nav'>
-        <BackButton onClick={() => Taro.redirectTo({ url: '/pages/index/index' })} />
+        <BackButton
+          onClick={() => {
+            const from = consumeReplayFrom()
+            if (from === 'me') {
+              Taro.redirectTo({ url: '/pages/me/index' })
+              return
+            }
+            Taro.redirectTo({ url: '/pages/index/index' })
+          }}
+        />
         <Text className='nav-title'>
           第 {currentIndex + 1} / {total} 题
         </Text>
@@ -133,13 +150,13 @@ export default function QuizPage() {
         )}
         <View className='btn-row' style={{ marginTop: 16 }}>
           <View className='btn btn-ghost' onClick={goPrev}>
-            上一题
+            <Text className='btn-label'>上一题</Text>
           </View>
           <View
             className={primaryDisabled ? 'btn is-disabled' : 'btn'}
             onClick={primaryDisabled ? undefined : onPrimary}
           >
-            {primaryLabel()}
+            <Text className='btn-label'>{primaryLabel()}</Text>
           </View>
         </View>
       </View>

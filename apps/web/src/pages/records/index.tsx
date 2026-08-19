@@ -1,22 +1,13 @@
-import { View, Text } from '@tarojs/components'
-import { TabBar } from '../../components/TabBar'
+import { Text, View } from '@tarojs/components'
+import Taro, { useDidShow } from '@tarojs/taro'
 
 export default function RecordsPage() {
+  useDidShow(() => {
+    Taro.redirectTo({ url: '/pages/me/index' })
+  })
   return (
     <View className='page'>
-      <View className='nav'>
-        <View className='hello'>
-          <Text className='hello-small'>记录</Text>
-          <Text className='hello-strong'>还没有存档</Text>
-        </View>
-      </View>
-      <View className='stage'>
-        <View className='card hero'>
-          <Text className='hero-title'>这一期不接学习记录。</Text>
-          <Text className='hint'>底部可以点进来看看，关卡数据只在这次打开里。</Text>
-        </View>
-      </View>
-      <TabBar active='records' />
+      <Text className='hint'>记录已放在「我的」里。</Text>
     </View>
   )
 }

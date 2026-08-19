@@ -3,7 +3,6 @@ import Taro from '@tarojs/taro'
 
 const TABS = [
   { key: 'home', label: '关卡', url: '/pages/index/index' },
-  { key: 'records', label: '记录', url: '/pages/records/index' },
   { key: 'me', label: '我的', url: '/pages/me/index' },
 ] as const
 

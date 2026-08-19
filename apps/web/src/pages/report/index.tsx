@@ -82,10 +82,10 @@ export default function ReportPage() {
         </View>
         <View className='btn-row' style={{ marginTop: 14 }}>
           <View className='btn' onClick={again}>
-            再来一套
+            <Text className='btn-label'>再来一套</Text>
           </View>
           <View className='btn btn-ghost' onClick={copyShare}>
-            生成海报
+            <Text className='btn-label'>生成海报</Text>
           </View>
         </View>
       </View>
