@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>关卡学 · UI 原型总览</title>
+    <link rel="stylesheet" href="./prototype.css" />
+  </head>
+  <body>
+    <div class="board">
+      <header class="board-head">
+        <div>
+          <p class="kicker">关卡学 · 暖色软 UI</p>
+          <h1>HTML 原型总览</h1>
+          <p>
+            视觉对齐示例图：奶油底、大圆角、橙色胶囊按钮、浅阴影。打开下面两套草图。静态原型，不接后端。
+          </p>
+        </div>
+        <nav class="tabs">
+          <a href="./index.html" aria-current="page">总览</a>
+          <a href="./01-core-flow.html">核心流</a>
+          <a href="./02-extended.html">扩展功能</a>
+        </nav>
+      </header>
+      <div class="row" style="grid-template-columns: 1fr 1fr; max-width: 880px">
+        <a class="list-card" href="./01-core-flow.html" style="text-decoration: none; color: inherit; min-height: 96px">
+          <div>
+            <strong>01 核心业务流程</strong>
+            <span>输入 · 答题 / 等待 / 失败 · 通关纸</span>
+          </div>
+        </a>
+        <a class="list-card" href="./02-extended.html" style="text-decoration: none; color: inherit; min-height: 96px">
+          <div>
+            <strong>02 扩展功能</strong>
+            <span>链接 · 来源 · 分享 · 多视角 · 记录</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

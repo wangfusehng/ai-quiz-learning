@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>关卡学 · 核心业务流程原型</title>
+    <link rel="stylesheet" href="./prototype.css" />
+  </head>
+  <body>
+    <div class="board">
+      <header class="board-head">
+        <div>
+          <p class="kicker">参考示例图 · 暖色软 UI</p>
+          <h1>核心业务流程</h1>
+          <p>大圆角卡片、橙色胶囊按钮、浅阴影。中列可切短答 / 等待 / 失败。仍是静态草图，不接后端。</p>
+        </div>
+        <nav class="tabs" aria-label="原型套">
+          <a href="./index.html">总览</a>
+          <a href="./01-core-flow.html" aria-current="page">核心流</a>
+          <a href="./02-extended.html">扩展功能</a>
+        </nav>
+      </header>
+
+      <div class="row">
+        <section>
+          <h2 class="col-label">首页 · 生成关卡</h2>
+          <article class="phone" aria-label="输入" data-phone-input>
+            <div class="status"><span>9:41</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+            <header class="nav">
+              <div class="hello">
+                <small>你好，</small>
+                <strong>同学</strong>
+              </div>
+              <div class="coin">
+                <span class="star" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 24 24"><path fill="#fff" d="m12 3 2.6 6.4L21 10l-5 4.2 1.6 6.8L12 17.8 6.4 21 8 14.2 3 10l6.4-.6z"/></svg>
+                </span>
+                8 分钟
+              </div>
+            </header>
+            <form class="stage" data-input-form>
+              <div class="card hero">
+                <h3>今天想闯哪一关？</h3>
+                <div class="field">
+                  <label for="material">把刚看完的正文贴进来</label>
+                  <textarea id="material" data-material placeholder="例如：RAG 的基本概念、Prompt 工程……">卡尼曼讲过，人对「确定损失」的厌恶，常常大过对同等收益的喜欢。看完视频觉得懂了，转头却说不清损失厌恶到底在怕什么。</textarea>
+                  <div class="counter" data-count></div>
+                </div>
+                <p class="hint">例如：RAG 的基本概念、工作流程、常见问题、Prompt 工程……</p>
+                <div class="alert" data-alert role="alert" tabindex="-1">材料太短，出题会空洞。再贴一段正文。</div>
+                <button class="btn" type="submit">开始生成题目
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13 5l7 7-7 7v-4H4v-6h9V5z"/></svg>
+                </button>
+              </div>
+              <p class="section-title">快速主题</p>
+              <div class="topic-grid">
+                <button class="topic" type="button"><b>损失厌恶</b><span>确定损失 · 收益不对称 · 提取练习</span></button>
+                <button class="topic" type="button"><b>看懂 ≠ 会讲</b><span>测验效应 · 主动回忆 · 8 分钟</span></button>
+              </div>
+              <p class="section-title">未完成的关卡</p>
+              <div class="progress-item">
+                <div class="ring" style="--p: 60%"><span>60%</span></div>
+                <div class="grow"><b>行为经济学</b><span>还差 3 题</span></div>
+                <div class="ico" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#f56a22" d="M4 6h16v2H4zm0 5h16v2H4zm0 5h10v2H4z"/></svg>
+                </div>
+              </div>
+              <div class="progress-item">
+                <div class="ring" style="--p: 40%"><span>40%</span></div>
+                <div class="grow"><b>合成数据</b><span>还差 5 题</span></div>
+                <div class="ico" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#f56a22" d="M12 2 2 7v10l10 5 10-5V7zm0 2.2 6.6 3.3L12 11 5.4 7.5z"/></svg>
+                </div>
+              </div>
+            </form>
+            <nav class="tabbar" aria-label="底部示意">
+              <button class="is-on" type="button">
+                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 3h7v4h-7z"/></svg>
+                关卡
+              </button>
+              <button type="button">
+                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 4h12v16H6zm2 2v12h8V6z"/></svg>
+                记录
+              </button>
+              <button type="button">
+                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 9 8H2l6 5-2 9 6-4 6 4-2-9 6-5h-7z"/></svg>
+                我的
+              </button>
+            </nav>
+          </article>
+        </section>
+
+        <section data-switcher>
+          <h2 class="col-label">答题中</h2>
+          <div class="tabs" style="margin-bottom: 10px">
+            <button class="chip is-on" type="button" data-show="quiz">答题</button>
+            <button class="chip" type="button" data-show="short">短答</button>
+            <button class="chip" type="button" data-show="wait">等待</button>
+            <button class="chip" type="button" data-show="fail">失败</button>
+          </div>
+
+          <div class="screen is-on" data-screen="quiz" data-phone-quiz>
+            <article class="phone" aria-label="答题">
+              <div class="status"><span>9:41</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+              <header class="nav">
+                <button class="back" type="button" aria-label="返回">
+                  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.4 4.6 7 13l8.4 8.4 1.5-1.5L10 13l6.9-6.9z"/></svg>
+                </button>
+                <h2>第 3 / 7 题</h2>
+                <div class="coin">
+                  <span class="star" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24"><path fill="#fff" d="m12 3 2.6 6.4L21 10l-5 4.2 1.6 6.8L12 17.8 6.4 21 8 14.2 3 10l6.4-.6z"/></svg>
+                  </span>
+                  8 min
+                </div>
+              </header>
+              <div class="stage">
+                <p class="q-meta"><em>损失厌恶</em><span>本题只打一个点</span></p>
+                <p class="stem">视频里说「确定损失」让人更难受。哪句更贴近材料？</p>
+                <div class="opts">
+                  <button class="opt" type="button" data-opt="wrong">人总是更爱冒险，所以会主动追求亏损。</button>
+                  <button class="opt" type="button" data-opt="right">同样一笔钱，确定亏掉往往比确定赚到更扎心。</button>
+                  <button class="opt" type="button" data-opt="other">这只是通货膨胀的另一种说法。</button>
+                </div>
+                <div data-after hidden>
+                  <div class="ok-bar" data-okbar>答对了！</div>
+                  <div class="explain">
+                    <b>解析</b>
+                    你可能把「确定损失」听成了「风险更大」。材料说的是同一笔钱的亏和赚不对称，不是鼓励你去亏。
+                    <div class="quote">原句 · 第 3 段：「人对确定损失的厌恶，常常大过对同等收益的喜欢。」</div>
+                  </div>
+                  <button class="linkish" type="button">这题出得不准</button>
+                </div>
+                <div class="btn-row" style="margin-top: 16px">
+                  <button class="btn btn-ghost" type="button">上一题</button>
+                  <button class="btn" type="button" data-submit disabled>继续</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="screen" data-screen="short">
+            <article class="phone" aria-label="短答">
+              <div class="status"><span>9:41</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+              <header class="nav">
+                <button class="back" type="button" aria-label="返回">
+                  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.4 4.6 7 13l8.4 8.4 1.5-1.5L10 13l6.9-6.9z"/></svg>
+                </button>
+                <h2>第 7 / 7 题</h2>
+                <div class="coin">8 min</div>
+              </header>
+              <div class="stage">
+                <p class="stem">用自己的话说明：为什么「看懂了视频」不等于「能讲出损失厌恶」？</p>
+                <div class="card">
+                  <div class="field">
+                    <label for="short">不打分，写完对照要点</label>
+                    <textarea id="short">当时听得很顺，但没有被提问，隔天只记得标题。</textarea>
+                  </div>
+                </div>
+                <p class="hint">可能盖到了：看懂是熟悉感 · 能讲出来才是提取练习</p>
+                <button class="btn" type="button" style="margin-top: 16px">看通关报告</button>
+              </div>
+            </article>
+          </div>
+
+          <div class="screen" data-screen="wait">
+            <article class="phone" aria-label="生成中">
+              <div class="status"><span>9:41</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+              <header class="nav">
+                <button class="back" type="button" aria-label="返回">
+                  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.4 4.6 7 13l8.4 8.4 1.5-1.5L10 13l6.9-6.9z"/></svg>
+                </button>
+                <h2>正在出题</h2>
+                <span></span>
+              </header>
+              <div class="stage">
+                <div class="wait-art"><div class="blob" aria-hidden="true"></div></div>
+                <p class="timer">00:12</p>
+                <p class="stem">正在出概念辨析题和干扰项</p>
+                <p class="hint" style="text-align:center">请留在这一页。切走可能中断。没有假进度条。</p>
+                <button class="btn btn-ghost" type="button" style="margin-top: 20px">取消本次</button>
+              </div>
+            </article>
+          </div>
+
+          <div class="screen" data-screen="fail">
+            <article class="phone" aria-label="失败">
+              <div class="status"><span>9:41</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+              <header class="nav">
+                <button class="back" type="button" aria-label="返回">
+                  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.4 4.6 7 13l8.4 8.4 1.5-1.5L10 13l6.9-6.9z"/></svg>
+                </button>
+                <h2>没写成</h2>
+                <span></span>
+              </header>
+              <div class="stage">
+                <div class="card hero">
+                  <h3>这页没写成。</h3>
+                  <p class="hint">模型忙，或原句对不上材料。没有用标题瞎编一套题。</p>
+                  <div class="btn-row" style="margin-top: 16px">
+                    <button class="btn" type="button">重试</button>
+                    <button class="btn btn-ghost" type="button">回首页</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="col-label">通关报告</h2>
+          <article class="phone" aria-label="报告">
+            <div class="status"><span>9:41</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+            <header class="nav">
+              <div class="hello">
+                <small>行为经济学</small>
+                <strong>这一关打完了</strong>
+              </div>
+              <div class="coin">+8 min</div>
+            </header>
+            <div class="stage">
+              <div class="card">
+                <h3 style="margin:0 0 8px;font-size:20px">这轮学得很稳</h3>
+                <p class="hint">损失厌恶不是「爱冒险」，是确定亏掉比确定赚到更扎心。</p>
+                <div class="master" style="margin-top: 14px">
+                  <div class="gauge" aria-label="掌握度 67%"><span><strong>67%</strong>已掌握</span></div>
+                  <p class="hint">6 道选择里答对 4 道。短答另计，不打百分制羞辱。</p>
+                </div>
+              </div>
+              <div class="card" style="margin-top: 12px">
+                <b>最该再看一眼的 2 点</b>
+                <ol class="improve">
+                  <li>和「风险越大收益越大」怎么分开</li>
+                  <li>看懂为什么还是讲不出来</li>
+                </ol>
+              </div>
+              <div class="card" style="margin-top: 12px">
+                <b>分享海报</b>
+                <p class="hint">发给朋友，约 3 分钟打同一关。</p>
+                <div class="share-box">海报 / 金句预览</div>
+              </div>
+              <div class="btn-row" style="margin-top: 14px">
+                <button class="btn" type="button">再来一套</button>
+                <button class="btn btn-ghost" type="button">生成海报</button>
+              </div>
+            </div>
+            <nav class="tabbar" aria-label="底部示意">
+              <button type="button">关卡</button>
+              <button type="button">记录</button>
+              <button class="is-on" type="button">我的</button>
+            </nav>
+          </article>
+        </section>
+      </div>
+    </div>
+    <script src="./prototype.js"></script>
+  </body>
+</html>

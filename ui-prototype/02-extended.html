@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>关卡学 · 扩展功能原型</title>
+    <link rel="stylesheet" href="./prototype.css" />
+  </head>
+  <body>
+    <div class="board">
+      <header class="board-head">
+        <div>
+          <p class="kicker">参考示例图 · 暖色软 UI</p>
+          <h1>扩展功能</h1>
+          <p>同一套圆角卡片和橙色按钮。第一行链接 / 来源 / 分享，第二行多视角 / 记录 / 说明。</p>
+        </div>
+        <nav class="tabs" aria-label="原型套">
+          <a href="./index.html">总览</a>
+          <a href="./01-core-flow.html">核心流</a>
+          <a href="./02-extended.html" aria-current="page">扩展功能</a>
+        </nav>
+      </header>
+
+      <div class="row">
+        <section>
+          <h2 class="col-label">链接输入</h2>
+          <article class="phone" aria-label="链接">
+            <div class="status"><span>9:41</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+            <header class="nav">
+              <button class="back" type="button" aria-label="返回">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.4 4.6 7 13l8.4 8.4 1.5-1.5L10 13l6.9-6.9z"/></svg>
+              </button>
+              <h2>换一种输入</h2>
+              <span></span>
+            </header>
+            <div class="stage">
+              <div class="card">
+                <div class="seg">
+                  <button type="button">文本</button>
+                  <button class="is-on" type="button">链接</button>
+                  <button type="button">文档</button>
+                </div>
+                <div class="field">
+                  <label for="url">公众号 / B 站链接</label>
+                  <input id="url" type="url" value="https://mp.weixin.qq.com/s/example" />
+                </div>
+                <p class="hint">解析到标题后再生成。做不到就失败，引导改贴正文。</p>
+                <button class="btn" type="button">解析这一篇</button>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section>
+          <h2 class="col-label">来源确认</h2>
+          <article class="phone" aria-label="来源">
+            <div class="status"><span>9:41</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+            <header class="nav">
+              <button class="back" type="button" aria-label="返回">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.4 4.6 7 13l8.4 8.4 1.5-1.5L10 13l6.9-6.9z"/></svg>
+              </button>
+              <h2>将引用的来源</h2>
+              <span></span>
+            </header>
+            <div class="stage">
+              <div class="card hero">
+                <h3>强化学习在争什么</h3>
+                <p class="hint">禁止静默用模型记忆出标准答案题。</p>
+                <label class="check"><input type="checkbox" checked /> 从试错到策略 · 某博客</label>
+                <label class="check"><input type="checkbox" checked /> 策略梯度为什么难训 · 专栏</label>
+                <label class="check"><input type="checkbox" /> 百科词条（可换掉）</label>
+                <button class="btn" type="button" style="margin-top: 12px">用勾选的来源出关</button>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section>
+          <h2 class="col-label">分享落地</h2>
+          <article class="phone" aria-label="分享">
+            <div class="status"><span>9:41</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+            <header class="nav">
+              <div class="hello">
+                <small>朋友刚搞懂了</small>
+                <strong>行为经济学</strong>
+              </div>
+              <div class="coin">3 min</div>
+            </header>
+            <div class="stage">
+              <div class="card">
+                <p class="hint">损失厌恶不是爱冒险。用大约 3 分钟打同一关。</p>
+                <div class="share-box" style="margin-top: 12px">金句海报预览</div>
+                <button class="btn" type="button" style="margin-top: 14px">开始答题</button>
+                <p class="hint">不必先注册。题目由 AI 根据材料生成。</p>
+              </div>
+            </div>
+            <nav class="tabbar">
+              <button class="is-on" type="button">关卡</button>
+              <button type="button">记录</button>
+              <button type="button">我的</button>
+            </nav>
+          </article>
+        </section>
+      </div>
+
+      <div class="row">
+        <section>
+          <h2 class="col-label">多视角题</h2>
+          <article class="phone" aria-label="多视角">
+            <div class="status"><span>9:41</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+            <header class="nav">
+              <button class="back" type="button" aria-label="返回">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.4 4.6 7 13l8.4 8.4 1.5-1.5L10 13l6.9-6.9z"/></svg>
+              </button>
+              <h2>第 2 / 7 题</h2>
+              <span></span>
+            </header>
+            <div class="stage">
+              <p class="stem">材料里各方怎么说「加班等于热爱」？</p>
+              <div class="opts">
+                <button class="opt is-right" type="button">材料主张：把工时包装成热情，方便忽略补偿。</button>
+                <button class="opt" type="button">文中反对：有人把加班看成技能加速。</button>
+                <button class="opt is-fade" type="button">「正确的人就该无条件加班」——禁止这样出题。</button>
+              </div>
+              <div class="explain" style="margin-top: 12px">
+                <b>解析</b>
+                材料主张第一句，常见反对是第二句。讲解呈现各方怎么说，不是宣布真理。
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section>
+          <h2 class="col-label">打过的关</h2>
+          <article class="phone" aria-label="记录">
+            <div class="status"><span>9:41</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+            <header class="nav">
+              <h2>打过的关</h2>
+              <span></span>
+            </header>
+            <div class="stage">
+              <div class="card list-card">
+                <div class="grow"><b>行为经济学</b><span>昨天 · 4/6</span></div>
+                <button class="btn btn-ghost" type="button">再打</button>
+              </div>
+              <div class="card list-card">
+                <div class="grow"><b>合成数据</b><span>3 月前 · 5/7</span></div>
+                <button class="btn btn-ghost" type="button">再打</button>
+              </div>
+              <p class="hint">不要能力雷达和学时竞赛。</p>
+            </div>
+            <nav class="tabbar">
+              <button type="button">关卡</button>
+              <button class="is-on" type="button">记录</button>
+              <button type="button">我的</button>
+            </nav>
+          </article>
+        </section>
+
+        <section>
+          <h2 class="col-label">说明</h2>
+          <article class="phone" aria-label="说明">
+            <div class="status"><span>9:41</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+            <header class="nav">
+              <button class="back" type="button" aria-label="返回">
+                <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.4 4.6 7 13l8.4 8.4 1.5-1.5L10 13l6.9-6.9z"/></svg>
+              </button>
+              <h2>关于题目</h2>
+              <span></span>
+            </header>
+            <div class="stage">
+              <div class="card hero">
+                <h3>AI 生成，有依据才出题。</h3>
+                <p class="hint">材料由你提供。题目、讲解、报告由模型生成，可能不准确。每题应能指回原句。</p>
+                <p class="hint">不是题库、不是家教、不是课程商城。</p>
+              </div>
+            </div>
+          </article>
+        </section>
+      </div>
+    </div>
+    <script src="./prototype.js"></script>
+  </body>
+</html>
