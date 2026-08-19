@@ -1,0 +1,10 @@
+[project]
+name = "guan-ka-xue-api"
+version = "0.1.0"
+description = "关卡学 FastAPI"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"

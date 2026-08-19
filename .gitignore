@@ -1,8 +1,11 @@
+# 敏感信息只放本地 .env，不要提交
 .env
 .env.*
 !.env.example
+
 node_modules/
 __pycache__/
 .venv/
 dist/
 .DS_Store
+.pytest_cache/
