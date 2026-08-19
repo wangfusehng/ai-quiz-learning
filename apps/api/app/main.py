@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.engine import Engine
 
 from app.errors import BizError
-from app.routers import auth, health, me, quizzes, records, reports
+from app.routers import auth, health, me, mistakes, quizzes, records, reports
 
 
 def create_app(*, engine: Engine | None = None) -> FastAPI:
@@ -39,6 +39,7 @@ def create_app(*, engine: Engine | None = None) -> FastAPI:
     app.include_router(auth.router, prefix="/v1")
     app.include_router(me.router, prefix="/v1")
     app.include_router(records.router, prefix="/v1")
+    app.include_router(mistakes.router, prefix="/v1")
     app.include_router(quizzes.router, prefix="/v1")
     app.include_router(reports.router, prefix="/v1")
     return app

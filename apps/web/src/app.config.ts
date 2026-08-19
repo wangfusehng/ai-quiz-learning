@@ -8,6 +8,9 @@ export default defineAppConfig({
     'pages/records/index',
     'pages/me/index',
     'pages/about/index',
+    'pages/mistakes/index',
+    'pages/mistakes/detail/index',
+    'pages/mistakes/practice/index',
   ],
   window: {
     navigationStyle: 'custom',

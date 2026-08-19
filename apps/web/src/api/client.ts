@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro'
 import type { AnswerSheet, QuizDocument, ReportDocument } from '../types/quiz'
 import { ApiError } from '../types/quiz'
-import type { AuthResponse, AuthUser, QuizRecordDetail, QuizRecordItem } from '../types/user'
+import type { AuthResponse, AuthUser, MistakeItem, MistakeReviewResult, QuizRecordDetail, QuizRecordItem } from '../types/user'
 import { readStoredToken, useAuth } from '../store/auth'
 
 function baseUrl(): string {
@@ -52,6 +52,9 @@ async function request<T>(option: Taro.request.Option, retry = true): Promise<T>
       ...(option.header || {}),
     },
   })
+  if (res.statusCode === 204) {
+    return undefined as T
+  }
   if (res.statusCode === 401 && retry) {
     const ok = await refreshWeappToken()
     if (ok) {
@@ -121,6 +124,39 @@ export function fetchRecord(id: number) {
   return request<QuizRecordDetail>({
     url: `/v1/records/${id}`,
     method: 'GET',
+    timeout: 15000,
+  })
+}
+
+export function fetchMistakes() {
+  return request<{ items: MistakeItem[] }>({
+    url: '/v1/mistakes',
+    method: 'GET',
+    timeout: 15000,
+  })
+}
+
+export function fetchMistake(id: number) {
+  return request<MistakeItem>({
+    url: `/v1/mistakes/${id}`,
+    method: 'GET',
+    timeout: 15000,
+  })
+}
+
+export function reviewMistake(id: number, optionId: string) {
+  return request<MistakeReviewResult>({
+    url: `/v1/mistakes/${id}/review`,
+    method: 'POST',
+    data: { optionId },
+    timeout: 15000,
+  })
+}
+
+export function deleteMistake(id: number) {
+  return request<void>({
+    url: `/v1/mistakes/${id}`,
+    method: 'DELETE',
     timeout: 15000,
   })
 }

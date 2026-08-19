@@ -2,7 +2,7 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
-from app.schemas.quiz import QuizDocument
+from app.schemas.quiz import Option, QuizDocument, SourceQuote
 
 
 class WeChatLoginRequest(BaseModel):
@@ -42,3 +42,31 @@ class QuizRecordList(BaseModel):
 
 class QuizRecordDetail(QuizRecordItem):
     quiz: QuizDocument
+
+
+class MistakeItem(BaseModel):
+    id: int
+    quizId: str
+    questionId: str
+    title: str
+    knowledgePoint: str
+    stem: str
+    options: list[Option]
+    correctOptionId: str
+    chosenOptionId: str
+    explanation: str
+    sourceQuote: SourceQuote
+    completedAt: datetime
+
+
+class MistakeList(BaseModel):
+    items: list[MistakeItem]
+
+
+class MistakeReviewRequest(BaseModel):
+    optionId: str = Field(min_length=1)
+
+
+class MistakeReviewResult(BaseModel):
+    mastered: bool
+    item: MistakeItem | None = None

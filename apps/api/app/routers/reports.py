@@ -21,7 +21,7 @@ def create_report_endpoint(
     report = create_report(quiz=body.quiz, answers=body.answers, generator=generator)
     if user is not None:
         try:
-            save_quiz_record(db, user=user, quiz=body.quiz, report=report)
+            save_quiz_record(db, user=user, quiz=body.quiz, report=report, answers=body.answers)
         except Exception:
             db.rollback()
     return report

@@ -1,7 +1,7 @@
 import { Button, Image, Input, Text, View } from '@tarojs/components'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { useMemo, useState } from 'react'
-import { fetchMe, fetchRecord, fetchRecords, silentLogin, updateMe } from '../../api/client'
+import { fetchMe, fetchMistakes, fetchRecord, fetchRecords, silentLogin, updateMe } from '../../api/client'
 import { TabBar } from '../../components/TabBar'
 import { useAuth } from '../../store/auth'
 import { stashReplayQuiz, useSession } from '../../store/session'
@@ -22,29 +22,34 @@ export default function MePage() {
   const nickname = user?.nickname || '同学'
   const connected = status === 'connected'
   const [records, setRecords] = useState<QuizRecordItem[]>([])
+  const [mistakeCount, setMistakeCount] = useState(0)
 
   useDidShow(() => {
     const load = async () => {
       if (!isWeapp) {
         useAuth.getState().setOffline()
         setRecords([])
+        setMistakeCount(0)
         return
       }
       if (useAuth.getState().status !== 'connected') {
         const ok = await silentLogin()
         if (!ok) {
           setRecords([])
+          setMistakeCount(0)
           return
         }
       }
       try {
         const me = await fetchMe()
         setUser(me)
-        const data = await fetchRecords()
-        setRecords(data.items)
+        const [recordData, mistakeData] = await Promise.all([fetchRecords(), fetchMistakes()])
+        setRecords(recordData.items)
+        setMistakeCount(mistakeData.items.length)
       } catch {
         useAuth.getState().setOffline()
         setRecords([])
+        setMistakeCount(0)
       }
     }
     load()
@@ -166,6 +171,32 @@ export default function MePage() {
             <Text className='me-stat-num'>{stats.rate}</Text>
             <Text className='me-stat-label'>平均正确率</Text>
           </View>
+        </View>
+
+        <View
+          className='card me-menu'
+          onClick={() => Taro.navigateTo({ url: '/pages/mistakes/index' })}
+        >
+          <Text className='me-menu-icon'>错</Text>
+          <Text className='me-menu-label'>错题本</Text>
+          {mistakeCount > 0 ? <Text className='me-menu-count'>{mistakeCount} 题</Text> : null}
+          <Text className='me-chevron'>›</Text>
+        </View>
+
+        <View
+          className='card me-menu'
+          onClick={() =>
+            Taro.navigateTo({
+              url:
+                mistakeCount > 0
+                  ? '/pages/mistakes/practice/index'
+                  : '/pages/mistakes/index',
+            })
+          }
+        >
+          <Text className='me-menu-icon'>练</Text>
+          <Text className='me-menu-label'>练习错题</Text>
+          <Text className='me-chevron'>›</Text>
         </View>
 
         <View
